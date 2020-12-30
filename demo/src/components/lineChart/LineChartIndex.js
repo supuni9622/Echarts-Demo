@@ -16,80 +16,32 @@ const data2 = [
       count: 12
     },
     {
-      rewardId: 2,
-      date: "2020-12-12",
-      count: 34
-    },
-    {
       rewardId: 1,
       date: "2020-12-13",
       count: 44
     },
     {
+        rewardId: 1,
+        date: "2020-12-15",
+        count: 30
+      },
+      {
+        rewardId: 2,
+        date: "2020-12-12",
+        count: 34
+      },
+    {
       rewardId: 2,
       date: "2020-12-13",
       count: 10
     },
-    {
-      rewardId: 3,
-      date: "2020-12-13",
-      count: 13
-    },
-    {
-      rewardId: 4,
-      date: "2020-12-13",
-      count: 20
-    },
+   
     {
       rewardId: 2,
       date: "2020-12-14",
       count: 34
     },
-    {
-      rewardId: 1,
-      date: "2020-12-15",
-      count: 30
-    },
-    {
-      rewardId: 2,
-      date: "2020-12-15",
-      count: 23
-    },
-    {
-      rewardId: 3,
-      date: "2020-12-15",
-      count: 45
-    },
-    {
-      rewardId: 4,
-      date: "2020-12-15",
-      count: 20
-    },
-    {
-      rewardId: 3,
-      date: "2020-12-12",
-      count: 24
-    },
-    {
-      rewardId: 4,
-      date: "2020-12-12",
-      count: 15
-    },
-    {
-      rewardId: 3,
-      date: "2020-12-14",
-      count: 100
-    },
-    {
-      rewardId: 1,
-      date: "2020-12-14",
-      count: 10
-    },
-    {
-      rewardId: 4,
-      date: "2020-12-14",
-      count: 90
-    },
+    
     {
       rewardId: 2,
       date: "2020-12-18",
@@ -108,17 +60,12 @@ const data2 = [
     return dateArray;
 };
 
-const fromDate = '2020-12-8';
-const toDate = '2020-12-20';
+const fromDate = '2020-12-11';
+const toDate = '2020-12-19';
 
 const dateSeries = getDatesSeries(fromDate,toDate);
 
-const dateSeriesLineChart = dateSeries.reduce((result, data) => {
-    result[data] = { date: moment(data).format("MMM-DD")};
-    return result;
-  }, {});
-
-  console.log('Test ', dateSeriesLineChart);
+console.debug('datessss', dateSeries);
 
      
 const removeLineKeyDuplication = (data, key) => {
@@ -129,61 +76,36 @@ const removeLineKeyDuplication = (data, key) => {
     ]
   };
 
-    // const transformLines = data2.reduce((result, { rewardId }) => {
-    //     result.push({key : rewardId });
-    //     return result;
-    //   }, []);
+  const transformLines = data2.reduce((result, { rewardId }) => {
+    result.push({ key: rewardId });
+    return result;
+  }, []);
 
-    //   const lineChartLineOptions = removeLineKeyDuplication(transformLines, line => line.key);
+  const lineChartLineOptions = removeLineKeyDuplication(transformLines, line => line.key)
 
-    //   console.log('Test 3', lineChartLineOptions);
+  console.log('Today 576576', lineChartLineOptions);
 
-    //   const test = lineChartLineOptions.reduce((result, {key}) => {
-    //     result[key] = { key : key, count: []};
-    //     return result;
-    //   }, dateSeriesLineChart);
+  const lineChartData12 = lineChartLineOptions.map((item)=>{
+    return(
+        {
+            key : item.key,
+            counts : [],
+        }
+    )   
+});
 
-    //   console.log('Test 5', test);
-
-//   const transformedLineData= data2.reduce((result,{rewardId,date, count})=>{
-//     if (result[date]) {
-//       result[date]={
-//         date: moment(date).format("MMM-DD"), 
-//         [rewardId]: count
-//       }
-//     }else{
-//       result[date]={
-//         date: moment(date).format("MMM-DD"), 
-//         [rewardId]: 0
-//       }
-//     }
-//     return result;
-//     },dateSeriesLineChart);
-
-//     console.log('Test 0', transformedLineData);
-    
-//     const transformedLineChartData = data2.reduce((result,{rewardId,date, count})=>{
-//     if(result[date] && !result[rewardId]){
-//        result[date][rewardId]=count;
-//     }else{
-//        result[date]={
-//           date:moment(date).format("MMM-DD"),
-//           [rewardId]: count
-//        }
-//     };
-    
-//     return result;
-
-//     },transformedLineData);
-
-//     console.log('Test 1', transformedLineChartData);
-
-//     const transformedArray = Object.values(transformedLineChartData);
-
-//     console.log('Test 2', transformedArray);
-
-
-//-------------------------------------------------------
+console.log('Today 3', lineChartData12);
+data2.forEach(({
+    rewardId,
+    count,
+    date
+  }) => {
+    lineChartData12.forEach(({ key, counts= []}) => {
+      if(key===rewardId){    
+         counts.push(count)
+      }
+    }); 
+  });
 
 var UserMatrix = [{
     ID: 1,
@@ -280,71 +202,9 @@ UserMatrix.forEach(function (user) {
 
 console.log('Test----------------', finalArr);
 
-const transformLines = data2.reduce((result, { rewardId }) => {
-    result.push(rewardId);
-    return result;
-  }, []);
-
-  const lineChartLineOptions = removeLineKeyDuplication(transformLines, line => line);
-
-  console.log('Test 3', lineChartLineOptions);
-
-  const test12 = lineChartLineOptions.reduce((result, data) => {
-    result[data] = { rewardId : data, dates : [], count : []};
-    return result;
-  }, {});
-
-  console.log('Test 12', test12);
-
-  const transformedLineData= data2.reduce((result,{rewardId,date, count})=>{
-        if (result[rewardId]) {
-          result[rewardId]={
-            rewardId : rewardId,
-            dates : date, 
-            count : count
-          }
-        }
-        // else{
-        //   result[date]={
-        //     date: moment(date).format("MMM-DD"), 
-        //     [rewardId]: 0
-        //   }
-        // }
-        return result;
-        },test12);
-
-        console.log('Test 13', transformedLineData); 
-
-        const transformedLineChartData = data2.reduce((result,{rewardId,date, count})=>{
-                if(result[rewardId] && !result[date]){
-                    result[rewardId].date = date;
-                   result[rewardId].count = count;
-               
-                }
-                // else{
-                //    result[date]={
-                //       date:moment(date).format("MMM-DD"),
-                //       [rewardId]: count
-                //    }
-                // };
-                
-                return result;
-            
-                },transformedLineData);
-
-                console.log('Test 14', transformedLineChartData); 
-
-
-
-
-
-
-
-
-
-
-
 //=================================================================
+
+
 
 const LineChartIndex = () => {
     return (
@@ -383,7 +243,7 @@ const LineChartIndex = () => {
             <Card className='mb-5 py-3'>
                 <h6 className='ml-2 px-2 mb-3'>Multiple Line Chart with Dynamic Data</h6>
                 <div className="p-2">
-                   <EnterpriseLineChart/>
+                   <EnterpriseLineChart lineOptions={lineChartLineOptions} xAxisData={['Dec-12','Dec-15','Dec-17','Dec-19','Dec-21']} data={lineChartData12}/>
                 </div>
             </Card>
         </div>
