@@ -70,7 +70,7 @@ console.debug('datessss', dateSeries);
      
 const removeLineKeyDuplication = (data, key) => {
     return [
-      ... new Map(
+      ...new Map(
         data.map(x => [key(x), x])
       ).values()
     ]
@@ -187,7 +187,7 @@ var UserMatrix = [{
 
 var finalArr = [];
 var months = ["February", "March", "April", "May", "June"];
-var attr = ["Views", "Ratings", "Comments"];
+//var attr = ["Views", "Ratings", "Comments"];
 UserMatrix.forEach(function (user) {
     months.forEach(function (m) {
         finalArr.push({
