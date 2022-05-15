@@ -17,7 +17,7 @@
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
-  "homepage": "https://supuni9622.github.io",
+  "homepage": "https://supuni9622.github.io/Echarts-Demo",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
